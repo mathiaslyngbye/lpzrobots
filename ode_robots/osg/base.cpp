@@ -25,7 +25,8 @@
 #include <iostream>
 #include <assert.h>
 #include <osg/Node>
-#include <osg/CameraNode>
+//#include <osg/CameraNode>
+#include <osg/Camera>
 #include <osg/Geode>
 #include <osg/Geometry>
 #include <osg/Texture2D>
