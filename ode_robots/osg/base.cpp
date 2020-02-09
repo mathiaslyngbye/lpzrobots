@@ -60,8 +60,8 @@
 #include <selforg/callbackable.h>
 
 #include <osgShadow/ShadowedScene>
-#include <osgShadow/ShadowVolume>
-//#include <osgShadow/LightSpacePerspectiveShadowMap>
+//#include <osgShadow/ShadowVolume>
+#include <osgShadow/LightSpacePerspectiveShadowMap>
 #include <osgShadow/ShadowTexture>
 #include <osgShadow/ShadowMap>
 #include <osgShadow/SoftShadowMap>
@@ -150,42 +150,41 @@ namespace lpzrobots {
   // add ShadowTechnique
 
   switch(shadowType) {
-//   case 1: /// LightSpacePerspectiveShadowMap
-//     {
-//       osg::ref_ptr<osgShadow::MinimalShadowMap> sm =
-//         new osgShadow::LightSpacePerspectiveShadowMapDB();
-//       shadowedScene->setShadowTechnique( sm.get() );
-//       float minLightMargin = 10.f;
-//       float maxFarPlane = 50;
-//       unsigned int baseTexUnit = 0;
-//       unsigned int shadowTexUnit = 7;
-//       sm->setMinLightMargin( minLightMargin );
-//       sm->setMaxFarPlane( maxFarPlane );
-//       sm->setTextureSize( osg::Vec2s((int)shadowTexSize,(int)shadowTexSize) );
-//       sm->setShadowTextureCoordIndex( shadowTexUnit );
-//       sm->setShadowTextureUnit( shadowTexUnit );
-//       sm->setBaseTextureCoordIndex( baseTexUnit );
-//       sm->setBaseTextureUnit( baseTexUnit );
-
-//     }
-  case 1: /// ShadowVolume
-    {
-      bool twoSided=false;
-      bool twoPass=false;
-      // some conf variables for ShadowVolume
-      bool updateLightPosition = false;
-
-      // hint to tell viewer to request stencil buffer when setting up windows
-      osg::DisplaySettings::instance()->setMinimumNumStencilBits(8);
-
-      osg::ref_ptr<osgShadow::ShadowVolume> sv = new osgShadow::ShadowVolume;
-      sv->setDynamicShadowVolumes(updateLightPosition);
-      if (twoSided)
-        sv->setDrawMode(osgShadow::ShadowVolumeGeometry::STENCIL_TWO_SIDED);
-      if (twoPass)
-        sv->setDrawMode(osgShadow::ShadowVolumeGeometry::STENCIL_TWO_PASS);
-      shadowedScene->setShadowTechnique(sv.get());
-    }
+   case 1: /// LightSpacePerspectiveShadowMap
+     {
+       osg::ref_ptr<osgShadow::MinimalShadowMap> sm =
+         new osgShadow::LightSpacePerspectiveShadowMapDB();
+       shadowedScene->setShadowTechnique( sm.get() );
+       float minLightMargin = 10.f;
+       float maxFarPlane = 50;
+       unsigned int baseTexUnit = 0;
+       unsigned int shadowTexUnit = 7;
+       sm->setMinLightMargin( minLightMargin );
+       sm->setMaxFarPlane( maxFarPlane );
+       sm->setTextureSize( osg::Vec2s((int)shadowTexSize,(int)shadowTexSize) );
+       sm->setShadowTextureCoordIndex( shadowTexUnit );
+       sm->setShadowTextureUnit( shadowTexUnit );
+       sm->setBaseTextureCoordIndex( baseTexUnit );
+       sm->setBaseTextureUnit( baseTexUnit );
+     }
+//  case 1: /// ShadowVolume
+//    {
+//      bool twoSided=false;
+//      bool twoPass=false;
+//      // some conf variables for ShadowVolume
+//      bool updateLightPosition = false;
+//
+//      // hint to tell viewer to request stencil buffer when setting up windows
+//      osg::DisplaySettings::instance()->setMinimumNumStencilBits(8);
+//
+//      osg::ref_ptr<osgShadow::ShadowVolume> sv = new osgShadow::ShadowVolume;
+//      sv->setDynamicShadowVolumes(updateLightPosition);
+//      if (twoSided)
+//        sv->setDrawMode(osgShadow::ShadowVolumeGeometry::STENCIL_TWO_SIDED);
+//      if (twoPass)
+//        sv->setDrawMode(osgShadow::ShadowVolumeGeometry::STENCIL_TWO_PASS);
+//      shadowedScene->setShadowTechnique(sv.get());
+//    }
     break;
   case 2: /// ShadowTexture
     {
